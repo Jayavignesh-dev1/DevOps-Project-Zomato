@@ -134,7 +134,7 @@ pipeline {
         }
         stage ("Git Checkout") {
             steps {
-                git 'https://github.com/KastroVKiran/Zomato-Project-Kastro.git'
+                   git 'https://github.com/Jayavignesh-dev1/DevOps-Project-Zomato.git'
             }
         }
         stage("Sonarqube Analysis"){
@@ -177,8 +177,8 @@ pipeline {
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'docker') {
-                        sh "docker tag zomato kastrov/zomato:latest "
-                        sh "docker push kastrov/zomato:latest "
+                        sh "docker tag zomato jayavigneshaws/zomato:latest "
+                        sh "docker push jayavigneshaws/zomato:latest "
                     }
                 }
             }
@@ -187,16 +187,16 @@ pipeline {
             steps {
                 script{
                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){
-                       sh 'docker-scout quickview kastrov/zomato:latest'
-                       sh 'docker-scout cves kastrov/zomato:latest'
-                       sh 'docker-scout recommendations kastrov/zomato:latest'
+                       sh 'docker-scout quickview jayavigneshaws/zomato:latest'
+                       sh 'docker-scout cves jayavigneshaws/zomato:latest'
+                       sh 'docker-scout recommendations jayavigneshaws/zomato:latest'
                    }
                 }
             }
         }
         stage ("Deploy to Container") {
             steps {
-                sh 'docker run -d --name zomato -p 3000:3000 kastrov/zomato:latest'
+                sh 'docker run -d --name zomato -p 3000:3000 jayavigneshaws/zomato:latest'
             }
         }
     }
@@ -219,7 +219,7 @@ pipeline {
                 </body>
                 </html>
             """,
-            to: 'kastrokiran@gmail.com',
+            to: 'jayavignesh5865@gmail.com',
             mimeType: 'text/html',
             attachmentsPattern: 'trivy.txt'
         }
